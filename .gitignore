@@ -1,0 +1,12 @@
+.gradle/
+build/
+app/build/
+local.properties
+signing/
+*.iml
+.idea/
+release/
+*.jks
+*.keystore
+*.apk
+tools/preview.png

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bg">#F6F7FB</color>
+    <color name="ic_bg">#1E6FE8</color>
+    <color name="ic_fg">#FFFFFF</color>
+    <!-- Character art (tools/draw_exercises.py) -->
+    <color name="fig_shirt">#1E88E5</color>
+    <color name="fig_shirt_far">#1565C0</color>
+    <color name="fig_pants">#37474F</color>
+    <color name="fig_pants_far">#263238</color>
+    <color name="fig_shirt_f">#EC407A</color>
+    <color name="fig_shirt_f_far">#C2185B</color>
+    <color name="fig_pants_f">#5E35B1</color>
+    <color name="fig_pants_f_far">#4527A0</color>
+    <color name="fig_hair_f">#4E342E</color>
+    <color name="fig_skin">#F2C29B</color>
+    <color name="fig_skin_far">#D6A078</color>
+    <color name="fig_hair">#5D4037</color>
+    <color name="fig_shoe">#37474F</color>
+    <color name="fig_prop">#00897B</color>
+    <color name="fig_prop_light">#B2DFDB</color>
+    <color name="fig_ground">#CFD8DC</color>
+    <color name="fig_shadow">#33000000</color>
+</resources>

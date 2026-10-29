@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Running figure on a route line. Own artwork, GPL-3.0-or-later. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <path android:fillColor="@color/ic_fg" android:pathData="M58,30a5.5,5.5 0 1 1 0,11a5.5,5.5 0 1 1 0,-11z" />
+    <path android:strokeColor="@color/ic_fg" android:strokeWidth="5" android:strokeLineCap="round" android:strokeLineJoin="round"
+        android:fillColor="#00000000" android:pathData="M54,45L48,60M54,45L63,51L69,48M54,45L44,49L40,44M48,60L57,66L56,76M48,60L42,70L33,70" />
+    <path android:strokeColor="@color/ic_fg" android:strokeWidth="3" android:strokeLineCap="round" android:fillColor="#00000000"
+        android:pathData="M28,80C40,76 52,84 64,79S80,74 84,76" />
+</vector>
