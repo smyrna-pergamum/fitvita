@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.3.0 (2026-10-30)
 - Workout tab: "Start your own workout", stopwatch and countdown timer, new routines (glutes, legs,
   waist & belly toning), yoga and pilates flows and exercises moved here.
 - 16 new illustrated exercises, including 6 pilates exercises and two new pilates flows.
