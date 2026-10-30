@@ -1,10 +1,10 @@
-# Draft metadata for F-Droid. Copy to metadata/ in a fork of https://gitlab.com/fdroid/fdroiddata
-# and open a merge request there. Titles, descriptions, screenshots and changelogs come from
-# fastlane/metadata in this repository.
 Categories:
   - Sports & Health
+  - Workout
+  - Meditation
 License: GPL-3.0-or-later
 AuthorName: Süleyman Akbulut
+AuthorWebSite: https://github.com/smyrna-pergamum
 SourceCode: https://github.com/smyrna-pergamum/fitvita
 IssueTracker: https://github.com/smyrna-pergamum/fitvita/issues
 Changelog: https://github.com/smyrna-pergamum/fitvita/blob/HEAD/CHANGELOG.md
@@ -13,13 +13,12 @@ AutoName: FitVita
 
 RepoType: git
 Repo: https://github.com/smyrna-pergamum/fitvita.git
-# F-Droid ships the GitHub release APK (same signature) when its own build is identical to it.
 Binaries: https://github.com/smyrna-pergamum/fitvita/releases/download/v%v/FitVita-%v.apk
 
 Builds:
   - versionName: 0.3.1
     versionCode: 4
-    commit: v0.3.1
+    commit: b5f3f57d1a7f91653eba0692d475a2233bdea574
     subdir: app
     gradle:
       - yes
