@@ -12,3 +12,4 @@ release/
 tools/preview.png
 tools/scenes.png
 tools/p*.png
+__pycache__/

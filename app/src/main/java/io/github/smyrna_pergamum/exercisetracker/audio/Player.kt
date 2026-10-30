@@ -40,6 +40,7 @@ data class NowPlaying(
     val buffering: Boolean = false,
     val error: Boolean = false,
     val sleepAt: Long? = null,
+    val hasNext: Boolean = false,
 )
 
 /**
@@ -53,6 +54,13 @@ class Player(private val app: App) {
     private var exo: ExoPlayer? = null
     private var sleepJob: Job? = null
 
+    /** What "next" steps through: the list the current track or station was started from. */
+    private sealed interface Item
+    private data class TrackItem(val track: Track, val title: String) : Item
+    private data class StationItem(val station: Station) : Item
+    private var queue: List<Item> = emptyList()
+    private var index = 0
+
     private fun player(): ExoPlayer = exo ?: ExoPlayer.Builder(app).build().also { p ->
         p.setAudioAttributes(AudioAttributes.Builder().setUsage(C.USAGE_MEDIA).setContentType(C.AUDIO_CONTENT_TYPE_MUSIC).build(), true)
         p.setWakeMode(C.WAKE_MODE_NETWORK)
@@ -64,19 +72,41 @@ class Player(private val app: App) {
         exo = p
     }
 
-    /** Plays a bundled track, looping. */
-    fun playTrack(t: Track, title: String) {
-        val p = player()
-        p.setMediaItem(MediaItem.fromUri(RawResourceDataSource.buildRawResourceUri(t.res)))
-        p.repeatMode = M3Player.REPEAT_MODE_ONE
-        start(NowPlaying(Source.MEDITATION, "track:${t.res}", title, t.artist))
+    /** Plays a bundled track, looping; [list] (track to title) is what "next" steps through. */
+    fun playTrack(t: Track, title: String, list: List<Pair<Track, String>> = listOf(t to title)) {
+        queue = list.map { TrackItem(it.first, it.second) }
+        index = list.indexOfFirst { it.first.res == t.res }.coerceAtLeast(0)
+        play(TrackItem(t, title))
     }
 
-    fun playStation(s: Station) {
+    /** Plays a station; [list] is what "next" steps through. */
+    fun playStation(s: Station, list: List<Station> = listOf(s)) {
+        queue = list.map { StationItem(it) }
+        index = list.indexOfFirst { it.id == s.id }.coerceAtLeast(0)
+        play(StationItem(s))
+    }
+
+    /** The next track or station of the list playback started from. */
+    fun next() {
+        if (queue.size < 2) return
+        index = (index + 1) % queue.size
+        play(queue[index])
+    }
+
+    private fun play(item: Item) {
         val p = player()
-        p.setMediaItem(MediaItem.fromUri(s.url))
-        p.repeatMode = M3Player.REPEAT_MODE_OFF
-        start(NowPlaying(Source.RADIO, "radio:${s.id}", s.name, s.subtitle))
+        when (item) {
+            is TrackItem -> {
+                p.setMediaItem(MediaItem.fromUri(RawResourceDataSource.buildRawResourceUri(item.track.res)))
+                p.repeatMode = M3Player.REPEAT_MODE_ONE
+                start(NowPlaying(Source.MEDITATION, "track:${item.track.res}", item.title, item.track.artist, hasNext = queue.size > 1))
+            }
+            is StationItem -> {
+                p.setMediaItem(MediaItem.fromUri(item.station.url))
+                p.repeatMode = M3Player.REPEAT_MODE_OFF
+                start(NowPlaying(Source.RADIO, "radio:${item.station.id}", item.station.name, item.station.subtitle, hasNext = queue.size > 1))
+            }
+        }
     }
 
     private fun start(np: NowPlaying) {
@@ -104,6 +134,7 @@ class Player(private val app: App) {
 
     fun stop() {
         sleepJob?.cancel()
+        queue = emptyList()
         exo?.release()
         exo = null
         _now.value = null
@@ -121,6 +152,10 @@ class PlaybackService : Service() {
             app.player.stop()
             return START_NOT_STICKY
         }
+        if (intent?.action == ACTION_NEXT) {
+            app.player.next()
+            return START_NOT_STICKY
+        }
         val nm = getSystemService(NotificationManager::class.java)
         nm.createNotificationChannel(NotificationChannel(CHANNEL, getString(R.string.channel_playback), NotificationManager.IMPORTANCE_LOW))
         ServiceCompat.startForeground(this, ID, notification(app.player.now.value),
@@ -131,12 +166,14 @@ class PlaybackService : Service() {
     private fun notification(np: NowPlaying?): Notification {
         val open = PendingIntent.getActivity(this, 0, Intent(this, MainActivity::class.java), PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
         val stop = PendingIntent.getService(this, 1, Intent(this, PlaybackService::class.java).setAction(ACTION_STOP), PendingIntent.FLAG_IMMUTABLE)
+        val next = PendingIntent.getService(this, 2, Intent(this, PlaybackService::class.java).setAction(ACTION_NEXT), PendingIntent.FLAG_IMMUTABLE)
         return NotificationCompat.Builder(this, CHANNEL)
             .setSmallIcon(R.drawable.ic_notification)
             .setContentTitle(np?.title ?: getString(R.string.app_name))
             .setContentText(np?.subtitle.orEmpty())
             .setOngoing(true)
             .setContentIntent(open)
+            .apply { if (np?.hasNext == true) addAction(0, getString(R.string.next), next) }
             .addAction(0, getString(R.string.stop), stop)
             .build()
     }
@@ -145,6 +182,7 @@ class PlaybackService : Service() {
         const val CHANNEL = "playback"
         const val ID = 21
         const val ACTION_STOP = "io.github.smyrna_pergamum.exercisetracker.STOP_AUDIO"
+        const val ACTION_NEXT = "io.github.smyrna_pergamum.exercisetracker.NEXT_AUDIO"
     }
 }
 

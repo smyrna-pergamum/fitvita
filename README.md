@@ -6,9 +6,11 @@ A colourful, gamified healthy-living app for Android. No account, no ads, no tra
 
 - **Activity (home)** – big step counter with an animated walking buddy, walked distance, 7-day bars;
   four daily quests (walk, drink water, move, yoga & breath); water tracker; GPS route recording.
-- **Workout** – ready and own routines, 22 illustrated exercises, one-tap sets, rest timer.
-- **Yoga & Pilates** – 10 yoga poses and 6 pilates exercises (illustrated), morning, evening and
-  pilates flows, guided breathing (1/3/5 min).
+- **Workout** – your own workout or ready routines (full body, cardio, dumbbell basics, glutes, legs,
+  waist & belly), yoga and pilates flows, 53 illustrated exercises, one-tap sets, rest timer,
+  stopwatch and countdown timer.
+- **Inner peace** – meditation routines (morning calm, stress relief, focus, sleep wind-down),
+  calm, box and 4-7-8 breathing, body scan, 5-4-3-2-1 grounding, muscle relaxation, gratitude.
 - **Rewards** – XP, levels and ranks, day streaks, 31 badges (tap one to see how to earn it), confetti when a quest is done.
 - **Radio** – free internet radio from the Radio Browser directory (local, world, all or by genre; no key, HTTPS streams only),
   also reachable from every workout and route screen; a mini player stays at the bottom.
@@ -16,7 +18,7 @@ A colourful, gamified healthy-living app for Android. No account, no ads, no tra
   (Devine formula), weight goal and trend chart.
 - **Guided workouts** – preview a routine, then do it one exercise at a time with countdowns,
   beeps and rest timers.
-- **Meditation music** – 11 tracks with a sleep timer; soft music behind the breathing exercise.
+- **Meditation music** – 11 tracks with a sleep timer and a next button; soft music behind the calm exercises.
 - **Nature sounds** – 10 illustrated, endlessly looping sounds: birds, wind, water, forest,
   restaurant, city centre, rain, fire, frogs & crickets, aquarium.
 - **History** (in Settings) – workouts and routes; share a route as a picture, save it or export GPX.

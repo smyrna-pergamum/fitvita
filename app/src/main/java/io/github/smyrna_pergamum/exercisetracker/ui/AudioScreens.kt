@@ -28,6 +28,7 @@ import androidx.compose.material.icons.filled.Pause
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Radio
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.SkipNext
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.FilterChip
@@ -128,7 +129,7 @@ fun RadioScreen(app: App, nav: NavHostController, back: Boolean = false) {
                                 }
                             },
                             colors = ListItemDefaults.colors(containerColor = if (playing) Accent.Route.copy(alpha = 0.08f) else Color.Transparent),
-                            modifier = Modifier.clickable { if (playing) app.player.toggle() else app.player.playStation(s) },
+                            modifier = Modifier.clickable { if (playing) app.player.toggle() else app.player.playStation(s, list) },
                         )
                         HorizontalDivider()
                     }
@@ -140,7 +141,7 @@ fun RadioScreen(app: App, nav: NavHostController, back: Boolean = false) {
     }
 }
 
-/** Meditation music list with a sleep timer, for the Yoga tab. */
+/** Meditation music list with a sleep timer, for the Inner peace tab. */
 @Composable
 fun MeditationMusic(app: App) {
     val now by app.player.now.collectAsState()
@@ -173,7 +174,7 @@ fun MeditationMusic(app: App) {
                         }
                     },
                     colors = ListItemDefaults.colors(containerColor = Color.Transparent),
-                    modifier = Modifier.clickable { if (playing) app.player.toggle() else app.player.playTrack(t, names[i]) },
+                    modifier = Modifier.clickable { if (playing) app.player.toggle() else app.player.playTrack(t, names[i], Tracks.all.zip(names)) },
                 )
             }
         }
@@ -199,6 +200,7 @@ fun MiniPlayer(app: App) {
             IconButton(onClick = { app.player.toggle() }) {
                 Icon(if (np.playing) Icons.Filled.Pause else Icons.Filled.PlayArrow, stringResource(if (np.playing) R.string.pause else R.string.resume))
             }
+            if (np.hasNext) IconButton(onClick = { app.player.next() }) { Icon(Icons.Filled.SkipNext, stringResource(R.string.next)) }
             IconButton(onClick = { app.player.stop() }) { Icon(Icons.Filled.Close, stringResource(R.string.stop)) }
         }
     }
@@ -223,7 +225,7 @@ fun NatureSounds(app: App) {
                         val i = Tracks.nature.indexOf(n)
                         val playing = now?.key == "track:${n.res}"
                         Box(Modifier.weight(1f).aspectRatio(1.6f).clip(RoundedCornerShape(20.dp))
-                            .clickable { if (playing) app.player.toggle() else app.player.playTrack(n.track, names[i]) }) {
+                            .clickable { if (playing) app.player.toggle() else app.player.playTrack(n.track, names[i], Tracks.nature.map { it.track }.zip(names)) }) {
                             androidx.compose.foundation.Image(androidx.compose.ui.res.painterResource(n.image), null,
                                 contentScale = androidx.compose.ui.layout.ContentScale.Crop, modifier = Modifier.fillMaxSize())
                             Box(Modifier.fillMaxSize().background(androidx.compose.ui.graphics.Brush.verticalGradient(listOf(Color.Transparent, Color.Black.copy(alpha = 0.55f)))))

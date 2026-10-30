@@ -300,3 +300,23 @@ class RadioParseTest {
         assertEquals("Türkiye · pop, rock · 128 kbps", s[0].subtitle)
     }
 }
+
+class CalmTest {
+    private val Calms = io.github.smyrna_pergamum.exercisetracker.domain.Calms
+
+    @Test fun breathingPhases() {
+        val box = Calms.get("box")!!
+        assertEquals(16, box.cycleSec)
+        val (p, into) = box.phaseAt(21)
+        assertEquals(io.github.smyrna_pergamum.exercisetracker.domain.Breath.HOLD, p.breath)
+        assertEquals(1, into)
+        assertEquals(180, Calms.get("478")!!.seconds(3))
+        assertEquals(180, Calms.get("body_scan")!!.seconds(5))
+    }
+
+    @Test fun routinesAndFlowsPointAtRealItems() {
+        Calms.routines.forEach { r -> r.steps.forEach { assertTrue(it.first, Calms.get(it.first) != null) } }
+        val ids = io.github.smyrna_pergamum.exercisetracker.ui.STARTERS.flatMap { it.second } + io.github.smyrna_pergamum.exercisetracker.ui.FLOWS.flatMap { it.second }
+        ids.forEach { assertTrue(it, io.github.smyrna_pergamum.exercisetracker.domain.Catalog.get(it) != null) }
+    }
+}

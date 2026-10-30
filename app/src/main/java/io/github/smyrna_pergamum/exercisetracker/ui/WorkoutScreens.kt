@@ -12,7 +12,11 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.material.icons.filled.HourglassBottom
+import androidx.compose.material.icons.filled.Timer
+import io.github.smyrna_pergamum.exercisetracker.domain.Group
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Undo
@@ -75,10 +79,12 @@ import kotlinx.coroutines.launch
 
 /** Ready-made routines so a first workout needs no setup. */
 internal val STARTERS = listOf(
-    R.string.starter_full_body to listOf("squat", "knee_push_up", "glute_bridge", "plank", "bird_dog"),
-    R.string.starter_cardio to listOf("jumping_jack", "high_knees", "squat", "mountain_climber"),
-    R.string.starter_dumbbell to listOf("goblet_squat", "bent_over_row", "shoulder_press", "biceps_curl"),
-    R.string.starter_core to listOf("plank", "crunch", "side_plank", "leg_raise", "superman"),
+    R.string.starter_full_body to listOf("squat", "knee_push_up", "glute_bridge", "plank", "bird_dog", "jumping_jack"),
+    R.string.starter_cardio to listOf("jumping_jack", "high_knees", "jump_squat", "mountain_climber", "side_lunge"),
+    R.string.starter_dumbbell to listOf("goblet_squat", "dumbbell_rdl", "bent_over_row", "shoulder_press", "biceps_curl", "triceps_extension"),
+    R.string.starter_glutes to listOf("glute_bridge", "donkey_kick", "sumo_squat", "single_leg_bridge", "lunge"),
+    R.string.starter_legs to listOf("squat", "lunge", "side_lunge", "jump_squat", "calf_raise", "wall_sit"),
+    R.string.starter_core to listOf("crunch", "bicycle_crunch", "russian_twist", "flutter_kick", "plank", "side_plank"),
 )
 
 @Composable
@@ -95,6 +101,10 @@ private fun StartScreen(repo: Repository, nav: NavHostController) {
     val emptyTitle = stringResource(R.string.workout)
     var deleting by remember { mutableStateOf<String?>(null) }
     val starterNames = STARTERS.map { stringResource(it.first) }
+    val flowNames = FLOWS.map { stringResource(it.first) }
+    var tick by remember { mutableLongStateOf(0L) }
+    LaunchedEffect(Timers.swRunning || Timers.cdRunning) { while (Timers.swRunning || Timers.cdRunning) { delay(500); tick++ } }
+    check(tick >= 0) // read so running timers update on their cards
 
     Column(Modifier.fillMaxSize()) {
         Bar(stringResource(R.string.tab_workout)) {
@@ -103,10 +113,22 @@ private fun StartScreen(repo: Repository, nav: NavHostController) {
             SettingsAction(nav)
         }
         Column(Modifier.verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            GradientCard(Accent.move(), onClick = { scope.launch { repo.startWorkout(emptyTitle, emptyList()) } }) {
+            GradientCard(Accent.move(), Modifier.fillMaxWidth(), onClick = { scope.launch { repo.startWorkout(emptyTitle, emptyList()) } }) {
                 Icon(Icons.Filled.FitnessCenter, null, Modifier.size(32.dp))
-                Text(stringResource(R.string.start_empty), style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                Text(stringResource(R.string.start_own), style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
                 Text(stringResource(R.string.start_empty_hint), style = MaterialTheme.typography.bodyMedium)
+            }
+            Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                GradientCard(Accent.water(), Modifier.weight(1f), onClick = { nav.navigate("timer/0") }) {
+                    Icon(Icons.Filled.Timer, null, Modifier.size(28.dp))
+                    Text(stringResource(R.string.stopwatch), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                    if (Timers.swRunning || Timers.stopwatch() > 0) Text(clockText(Timers.stopwatch(), tenths = false))
+                }
+                GradientCard(Accent.body(), Modifier.weight(1f), onClick = { nav.navigate("timer/1") }) {
+                    Icon(Icons.Filled.HourglassBottom, null, Modifier.size(28.dp))
+                    Text(stringResource(R.string.countdown), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                    if (Timers.cdRunning) Text(clockText(Timers.countdown() + 999, tenths = false))
+                }
             }
             if (routines.isNotEmpty()) {
                 Text(stringResource(R.string.my_routines), style = MaterialTheme.typography.titleMedium)
@@ -118,12 +140,37 @@ private fun StartScreen(repo: Repository, nav: NavHostController) {
             STARTERS.forEachIndexed { i, (_, ids) ->
                 RoutineCard(starterNames[i], ids, onStart = { nav.navigate("preview/starter:$i") })
             }
+            Text(stringResource(R.string.yoga_pilates), style = MaterialTheme.typography.titleMedium)
+            FLOWS.forEachIndexed { i, (_, ids) ->
+                RoutineCard(flowNames[i], ids, onStart = { nav.navigate("preview/flow:$i") })
+            }
+            PoseRow(R.string.group_yoga, Catalog.all.filter { it.group == Group.YOGA }, nav)
+            PoseRow(R.string.group_pilates, Catalog.all.filter { it.group == Group.PILATES }, nav)
             Text(stringResource(R.string.routine_hint), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
     }
     deleting?.let { id ->
         Confirm(stringResource(R.string.delete_routine), stringResource(R.string.delete_routine_text), stringResource(R.string.delete),
             { scope.launch { repo.deleteRoutine(id) } }) { deleting = null }
+    }
+}
+
+/** A horizontal strip of exercise pictures; tap one for its steps. */
+@Composable
+private fun PoseRow(title: Int, list: List<io.github.smyrna_pergamum.exercisetracker.domain.Exercise>, nav: NavHostController) {
+    Text(stringResource(title), style = MaterialTheme.typography.titleMedium)
+    Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        list.forEach { e ->
+            Card(onClick = { nav.navigate("exercise/${e.id}") }, shape = RoundedCornerShape(20.dp), modifier = Modifier.width(132.dp)) {
+                Column(Modifier.padding(6.dp)) {
+                    Box(Modifier.fillMaxWidth().height(90.dp).clip(RoundedCornerShape(16.dp)).background(groupTint(e.group))) {
+                        ExerciseImage(e, Modifier.fillMaxSize())
+                    }
+                    Text(stringResource(e.title), style = MaterialTheme.typography.labelLarge, maxLines = 2,
+                        textAlign = androidx.compose.ui.text.style.TextAlign.Center, modifier = Modifier.fillMaxWidth().padding(top = 4.dp))
+                }
+            }
+        }
     }
 }
 

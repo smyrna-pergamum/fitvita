@@ -10,7 +10,7 @@ import androidx.compose.material.icons.filled.EmojiEvents
 import androidx.compose.material.icons.filled.FitnessCenter
 import androidx.compose.material.icons.filled.History
 import androidx.compose.material.icons.filled.Radio
-import androidx.compose.material.icons.filled.SelfImprovement
+import androidx.compose.material.icons.filled.Spa
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -42,7 +42,7 @@ private data class Tab(val route: String, val label: Int, val icon: ImageVector)
 private val TABS = listOf(
     Tab("activity", R.string.tab_activity, Icons.AutoMirrored.Filled.DirectionsWalk),
     Tab("workout", R.string.tab_workout, Icons.Filled.FitnessCenter),
-    Tab("yoga", R.string.tab_yoga, Icons.Filled.SelfImprovement),
+    Tab("yoga", R.string.tab_yoga, Icons.Filled.Spa),
     Tab("rewards", R.string.tab_rewards, Icons.Filled.EmojiEvents),
     Tab("radio", R.string.radio, Icons.Filled.Radio),
 )
@@ -60,13 +60,14 @@ fun AppNav(app: App, repo: Repository, settings: Settings) {
     Scaffold(
         contentWindowInsets = WindowInsets(0),
         bottomBar = {
-            androidx.compose.foundation.layout.Column {
-            if (route != "radio") MiniPlayer(app)
+            // Without the tab bar the player sits right above the system navigation bar.
+            androidx.compose.foundation.layout.Column(if (showTabs) Modifier else Modifier.navigationBarsPadding()) {
+            MiniPlayer(app)
             if (showTabs) NavigationBar {
                 TABS.forEach { t ->
                     NavigationBarItem(
                         selected = route == t.route,
-                        onClick = { nav.navigate(t.route) { popUpTo("activity") { saveState = true }; launchSingleTop = true; restoreState = true } },
+                        onClick = { nav.navigate(t.route) { popUpTo("activity"); launchSingleTop = true } },
                         icon = { Icon(t.icon, null) },
                         label = { Text(stringResource(t.label), maxLines = 1) },
                     )
@@ -75,16 +76,18 @@ fun AppNav(app: App, repo: Repository, settings: Settings) {
             }
         },
     ) { pad ->
-        NavHost(nav, "activity", Modifier.padding(pad).then(if (showTabs) Modifier else Modifier.navigationBarsPadding()).imePadding()) {
+        NavHost(nav, "activity", Modifier.padding(pad).imePadding()) {
             composable("workout") { WorkoutTab(app, repo, settings, nav) }
             composable("exercises?pick={pick}", arguments = listOf(navArgument("pick") { type = NavType.BoolType; defaultValue = false })) { e ->
                 ExercisesScreen(repo, nav, pick = e.arguments?.getBoolean("pick") == true)
             }
             composable("exercise/{id}") { e -> ExerciseDetail(repo, nav, e.arguments!!.getString("id")!!) }
             composable("activity") { ActivityTab(app, repo, settings, game, nav) }
-            composable("yoga") { YogaScreen(app, repo, nav) }
+            composable("yoga") { YogaScreen(app, nav) }
             composable("rewards") { RewardsScreen(game, nav) }
-            composable("breathe/{min}") { e -> BreatheScreen(app, repo, nav, e.arguments?.getString("min")?.toIntOrNull()?.coerceIn(1, 30) ?: 3) }
+            composable("breathe/{min}") { e -> CalmSession(app, repo, nav, "ex:calm:" + e.arguments?.getString("min")) }
+            composable("calm/{spec}") { e -> CalmSession(app, repo, nav, e.arguments!!.getString("spec")!!) }
+            composable("timer/{tab}") { e -> TimerScreen(nav, e.arguments?.getString("tab")?.toIntOrNull() ?: 0) }
             composable("activity/{id}") { e -> ActivityDetail(app, repo, nav, e.arguments!!.getString("id")!!) }
             composable("history") { HistoryScreen(repo, nav) }
             composable("done/{id}") { e -> WorkoutDetail(repo, settings, nav, e.arguments!!.getString("id")!!) }
