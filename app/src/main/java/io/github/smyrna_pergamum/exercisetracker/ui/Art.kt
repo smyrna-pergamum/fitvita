@@ -67,6 +67,18 @@ object Art {
         R.drawable.ex_yoga_forward_bend_b to R.drawable.exf_yoga_forward_bend_b,
         R.drawable.ex_yoga_savasana_a to R.drawable.exf_yoga_savasana_a,
         R.drawable.ex_yoga_savasana_b to R.drawable.exf_yoga_savasana_b,
+        R.drawable.ex_pilates_hundred_a to R.drawable.exf_pilates_hundred_a,
+        R.drawable.ex_pilates_hundred_b to R.drawable.exf_pilates_hundred_b,
+        R.drawable.ex_pilates_roll_up_a to R.drawable.exf_pilates_roll_up_a,
+        R.drawable.ex_pilates_roll_up_b to R.drawable.exf_pilates_roll_up_b,
+        R.drawable.ex_pilates_single_leg_a to R.drawable.exf_pilates_single_leg_a,
+        R.drawable.ex_pilates_single_leg_b to R.drawable.exf_pilates_single_leg_b,
+        R.drawable.ex_pilates_leg_circle_a to R.drawable.exf_pilates_leg_circle_a,
+        R.drawable.ex_pilates_leg_circle_b to R.drawable.exf_pilates_leg_circle_b,
+        R.drawable.ex_pilates_swimming_a to R.drawable.exf_pilates_swimming_a,
+        R.drawable.ex_pilates_swimming_b to R.drawable.exf_pilates_swimming_b,
+        R.drawable.ex_pilates_teaser_a to R.drawable.exf_pilates_teaser_a,
+        R.drawable.ex_pilates_teaser_b to R.drawable.exf_pilates_teaser_b,
     )
 
     val walker = listOf(R.drawable.walker_0, R.drawable.walker_1, R.drawable.walker_2, R.drawable.walker_3, R.drawable.walker_4, R.drawable.walker_5, R.drawable.walker_6, R.drawable.walker_7)

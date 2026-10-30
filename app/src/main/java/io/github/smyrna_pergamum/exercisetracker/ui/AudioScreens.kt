@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -20,6 +21,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Forest
 import androidx.compose.material.icons.filled.GraphicEq
 import androidx.compose.material.icons.filled.MusicNote
 import androidx.compose.material.icons.filled.Pause
@@ -104,6 +106,7 @@ fun RadioScreen(app: App, nav: NavHostController, back: Boolean = false) {
             Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 if (myCountry != null) FilterChip(local, { local = true }, label = { Text(Locale("", myCountry).displayCountry) })
                 FilterChip(!local, { local = false }, label = { Text(stringResource(R.string.radio_world)) })
+                FilterChip(tag == null, { tag = null }, label = { Text(stringResource(R.string.radio_all)) })
                 TAGS.forEach { t -> FilterChip(tag == t, { tag = if (tag == t) null else t }, label = { Text(t) }) }
             }
         }
@@ -197,6 +200,55 @@ fun MiniPlayer(app: App) {
                 Icon(if (np.playing) Icons.Filled.Pause else Icons.Filled.PlayArrow, stringResource(if (np.playing) R.string.pause else R.string.resume))
             }
             IconButton(onClick = { app.player.stop() }) { Icon(Icons.Filled.Close, stringResource(R.string.stop)) }
+        }
+    }
+}
+
+/** Endless ambient sounds (birds, rain, fire …) with pictures; one plays at a time. */
+@Composable
+fun NatureSounds(app: App) {
+    val now by app.player.now.collectAsState()
+    val names = Tracks.nature.map { stringResource(it.title) }
+    Card(shape = RoundedCornerShape(28.dp)) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(Icons.Filled.Forest, null, tint = Accent.Route)
+                Text(stringResource(R.string.nature_sounds), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(start = 8.dp).weight(1f))
+                Text(stringResource(R.string.loop_hint), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            }
+            Tracks.nature.chunked(2).forEach { row ->
+                Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                    row.forEach { n ->
+                        val i = Tracks.nature.indexOf(n)
+                        val playing = now?.key == "track:${n.res}"
+                        Box(Modifier.weight(1f).aspectRatio(1.6f).clip(RoundedCornerShape(20.dp))
+                            .clickable { if (playing) app.player.toggle() else app.player.playTrack(n.track, names[i]) }) {
+                            androidx.compose.foundation.Image(androidx.compose.ui.res.painterResource(n.image), null,
+                                contentScale = androidx.compose.ui.layout.ContentScale.Crop, modifier = Modifier.fillMaxSize())
+                            Box(Modifier.fillMaxSize().background(androidx.compose.ui.graphics.Brush.verticalGradient(listOf(Color.Transparent, Color.Black.copy(alpha = 0.55f)))))
+                            Row(Modifier.align(Alignment.BottomStart).padding(10.dp), verticalAlignment = Alignment.CenterVertically) {
+                                Icon(if (playing && now?.playing == true) Icons.Filled.Pause else Icons.Filled.PlayArrow, null, tint = Color.White, modifier = Modifier.size(20.dp))
+                                Text(names[i], color = Color.White, fontWeight = FontWeight.Bold, style = MaterialTheme.typography.labelLarge,
+                                    maxLines = 1, overflow = TextOverflow.Ellipsis, modifier = Modifier.padding(start = 4.dp))
+                            }
+                        }
+                    }
+                }
+            }
+            if (now?.source == Source.MEDITATION) SleepTimerRow(app)
+        }
+    }
+}
+
+@Composable
+private fun SleepTimerRow(app: App) {
+    val now by app.player.now.collectAsState()
+    Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        Text(stringResource(R.string.sleep_timer), Modifier.align(Alignment.CenterVertically))
+        listOf(null, 10, 20, 30, 60).forEach { m ->
+            val active = if (m == null) now?.sleepAt == null else now?.sleepAt?.let { ((it - System.currentTimeMillis()) / 60_000 + 1).toInt() in (m - 1)..m } == true
+            FilterChip(active, { app.player.sleepTimer(m) }, label = { Text(if (m == null) "∞" else stringResource(R.string.minutes_n, m)) })
         }
     }
 }

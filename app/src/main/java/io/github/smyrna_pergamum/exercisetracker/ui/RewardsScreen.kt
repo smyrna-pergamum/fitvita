@@ -1,6 +1,7 @@
 package io.github.smyrna_pergamum.exercisetracker.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -28,6 +29,7 @@ import androidx.compose.material.icons.filled.Map
 import androidx.compose.material.icons.filled.MonitorWeight
 import androidx.compose.material.icons.filled.MilitaryTech
 import androidx.compose.material.icons.filled.SelfImprovement
+import androidx.compose.material.icons.filled.SportsGymnastics
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.WaterDrop
 import androidx.compose.material.icons.filled.WbSunny
@@ -37,6 +39,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -58,6 +62,14 @@ import io.github.smyrna_pergamum.exercisetracker.domain.BadgeState
 private data class BadgeLook(val icon: ImageVector, val color: Color, val title: Int, val desc: Int)
 
 private fun look(b: Badge): BadgeLook = when (b) {
+    Badge.FIRST_GLASS -> BadgeLook(Icons.Filled.WaterDrop, Accent.Water, R.string.b_first_glass, R.string.b_first_glass_d)
+    Badge.FIRST_QUEST -> BadgeLook(Icons.Filled.Star, Accent.Xp, R.string.b_first_quest, R.string.b_first_quest_d)
+    Badge.STEPS_5K -> BadgeLook(Icons.AutoMirrored.Filled.DirectionsWalk, Accent.Steps, R.string.b_steps_5k, R.string.b_steps_5k_d)
+    Badge.WORKOUTS_3 -> BadgeLook(Icons.Filled.FitnessCenter, Accent.Move, R.string.b_workouts_3, R.string.b_workouts_3_d)
+    Badge.ROUTE_1K -> BadgeLook(Icons.Filled.Map, Accent.Route, R.string.b_route_1k, R.string.b_route_1k_d)
+    Badge.LEVEL_2 -> BadgeLook(Icons.Filled.WorkspacePremium, Accent.Violet, R.string.b_level_2, R.string.b_level_2_d)
+    Badge.MIND_3 -> BadgeLook(Icons.Filled.SelfImprovement, Accent.Mind, R.string.b_mind_3, R.string.b_mind_3_d)
+    Badge.FIRST_PILATES -> BadgeLook(Icons.Filled.SportsGymnastics, Accent.Body, R.string.b_first_pilates, R.string.b_first_pilates_d)
     Badge.FIRST_STEPS -> BadgeLook(Icons.AutoMirrored.Filled.DirectionsWalk, Accent.Steps, R.string.b_first_steps, R.string.b_first_steps_d)
     Badge.STEPS_10K -> BadgeLook(Icons.AutoMirrored.Filled.DirectionsWalk, Accent.Steps, R.string.b_steps_10k, R.string.b_steps_10k_d)
     Badge.STEPS_20K -> BadgeLook(Icons.AutoMirrored.Filled.DirectionsRun, Accent.StepsEnd, R.string.b_steps_20k, R.string.b_steps_20k_d)
@@ -145,19 +157,25 @@ fun RewardsScreen(game: GameState?, nav: NavHostController) {
             }
         }
         item(span = { GridItemSpan(maxLineSpan) }) {
-            Text(stringResource(R.string.badges), style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Column {
+                Text(stringResource(R.string.badges), style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                Text(stringResource(R.string.badges_hint), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            }
         }
         items(g.badges, key = { it.badge.name }) { BadgeTile(it) }
     }
 }
 
+/** Badge with its condition always visible; tap for details and progress. */
 @Composable
 private fun BadgeTile(b: BadgeState) {
     val l = look(b.badge)
     val title = stringResource(l.title)
     val desc = stringResource(l.desc)
     val state = stringResource(if (b.unlocked) R.string.badge_unlocked else R.string.badge_locked)
-    Column(Modifier.semantics(mergeDescendants = true) { contentDescription = "$title. $desc. $state" }, horizontalAlignment = Alignment.CenterHorizontally) {
+    var open by androidx.compose.runtime.saveable.rememberSaveable { androidx.compose.runtime.mutableStateOf(false) }
+    Column(Modifier.clickable { open = true }.semantics(mergeDescendants = true) { contentDescription = "$title. $desc. $state" },
+        horizontalAlignment = Alignment.CenterHorizontally) {
         Box(
             Modifier.size(72.dp).clip(CircleShape).background(if (b.unlocked) l.color else MaterialTheme.colorScheme.surfaceVariant),
             contentAlignment = Alignment.Center,
@@ -165,7 +183,28 @@ private fun BadgeTile(b: BadgeState) {
             Icon(l.icon, null, tint = if (b.unlocked) Color.White else MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f), modifier = Modifier.size(36.dp))
         }
         Text(title, style = MaterialTheme.typography.labelLarge, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center, modifier = Modifier.padding(top = 6.dp))
-        Text(if (b.unlocked) desc else "${b.progress} / ${b.target}", style = MaterialTheme.typography.labelSmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant, textAlign = TextAlign.Center, maxLines = 2)
+        Text(desc, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant, textAlign = TextAlign.Center, maxLines = 3)
+        if (!b.unlocked) LinearProgressIndicator(progress = { b.progress.toFloat() / b.target.coerceAtLeast(1) }, color = l.color,
+            modifier = Modifier.fillMaxWidth(0.8f).padding(top = 4.dp).height(4.dp).clip(RoundedCornerShape(2.dp)))
     }
+    if (open) androidx.compose.material3.AlertDialog(
+        onDismissRequest = { open = false },
+        icon = {
+            Box(Modifier.size(64.dp).clip(CircleShape).background(if (b.unlocked) l.color else MaterialTheme.colorScheme.surfaceVariant), contentAlignment = Alignment.Center) {
+                Icon(l.icon, null, tint = if (b.unlocked) Color.White else MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.size(32.dp))
+            }
+        },
+        title = { Text(title, textAlign = TextAlign.Center) },
+        text = {
+            Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                Text(stringResource(R.string.badge_how), style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
+                Text(desc, textAlign = TextAlign.Center, style = MaterialTheme.typography.bodyLarge)
+                LinearProgressIndicator(progress = { b.progress.toFloat() / b.target.coerceAtLeast(1) }, color = l.color,
+                    modifier = Modifier.fillMaxWidth().height(8.dp).clip(RoundedCornerShape(4.dp)))
+                Text(if (b.unlocked) stringResource(R.string.badge_earned) else stringResource(R.string.badge_progress, b.progress, b.target),
+                    fontWeight = FontWeight.Bold)
+            }
+        },
+        confirmButton = { androidx.compose.material3.TextButton(onClick = { open = false }) { Text(stringResource(R.string.ok)) } },
+    )
 }

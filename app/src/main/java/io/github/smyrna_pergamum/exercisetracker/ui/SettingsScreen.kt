@@ -127,7 +127,7 @@ fun SettingsScreen(app: App, settings: Settings, nav: NavHostController) {
             Section(stringResource(R.string.theme))
             FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 listOf(ThemeMode.BLUE to R.string.theme_blue, ThemeMode.DARK to R.string.theme_dark, ThemeMode.PINK to R.string.theme_pink,
-                    ThemeMode.LIGHT to R.string.theme_light).forEach { (m, label) ->
+                    ThemeMode.BROWN to R.string.theme_brown).forEach { (m, label) ->
                     FilterChip(settings.theme == m, { scope.launch { app.settings.setTheme(m) } }, label = { Text(stringResource(label)) })
                 }
             }

@@ -22,6 +22,9 @@ object Body {
         return 18.5 * m * m..24.9 * m * m
     }
 
+    /** Devine formula, a common reference for "ideal" weight by sex and height. */
+    fun idealKg(heightCm: Int, female: Boolean): Double = (if (female) 45.5 else 50.0) + 0.9055 * (heightCm - 152.4)
+
     /** Signed difference to the goal: negative means "lose", positive "gain". */
     fun toGoal(nowKg: Double, goalKg: Double) = goalKg - nowKg
 

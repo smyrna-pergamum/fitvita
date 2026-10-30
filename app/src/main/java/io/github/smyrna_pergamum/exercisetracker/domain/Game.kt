@@ -16,6 +16,7 @@ data class DayFacts(
     val routeMinutes: Int = 0,
     val earliestWorkoutHour: Int? = null,
     val weighed: Boolean = false,
+    val pilates: Int = 0,
 )
 
 data class Goals(val steps: Int, val water: Int, val weightKg: Double? = null)
@@ -24,7 +25,7 @@ enum class Quest { STEPS, WATER, MOVE, MIND }
 
 data class Level(val level: Int, val intoLevel: Int, val forNext: Int)
 
-enum class Badge { FIRST_STEPS, STEPS_10K, STEPS_20K, FIRST_WORKOUT, WORKOUTS_10, WORKOUTS_50, FIRST_YOGA, YOGA_10,
+enum class Badge { FIRST_GLASS, FIRST_QUEST, STEPS_5K, WORKOUTS_3, ROUTE_1K, LEVEL_2, MIND_3, FIRST_PILATES, FIRST_STEPS, STEPS_10K, STEPS_20K, FIRST_WORKOUT, WORKOUTS_10, WORKOUTS_50, FIRST_YOGA, YOGA_10,
     FIRST_ROUTE, ROUTE_5K, TOTAL_42K, HYDRATED, HYDRATED_7, STREAK_3, STREAK_7, STREAK_30, PERFECT_DAY, EARLY_BIRD, LEVEL_5, LEVEL_10,
     FIRST_WEIGH, WEIGH_30, WEIGHT_GOAL }
 
@@ -92,7 +93,6 @@ object Game {
         return best
     }
 
-    /** [longestRouteKm] is the longest single route. */
     /** Goal reached when the weight moved from the start to (or past) the goal in the intended direction. */
     fun reached(startKg: Double, nowKg: Double, goalKg: Double): Boolean =
         if (goalKg <= startKg) nowKg <= goalKg else nowKg >= goalKg
@@ -109,10 +109,22 @@ object Game {
         val longest = longestStreak(days, g)
         val perfect = all.any { done(it, g).size == Quest.entries.size }
         val early = all.any { (it.earliestWorkoutHour ?: 24) < 8 }
+        val glasses = all.sumOf { it.glasses }
+        val anyQuest = all.any { done(it, g).isNotEmpty() }
+        val pilates = all.sumOf { it.pilates }
         fun b(badge: Badge, value: Number, target: Number) =
             BadgeState(badge, value.toDouble() >= target.toDouble(), value.toInt().coerceAtMost(target.toInt()), target.toInt())
+        // Beginner badges first, so there is always something within reach.
         return listOf(
+            b(Badge.FIRST_GLASS, glasses, 1),
+            b(Badge.FIRST_QUEST, if (anyQuest) 1 else 0, 1),
             b(Badge.FIRST_STEPS, maxSteps, 1_000),
+            b(Badge.STEPS_5K, maxSteps, 5_000),
+            b(Badge.WORKOUTS_3, workouts, 3),
+            b(Badge.ROUTE_1K, longestRouteKm, 1),
+            b(Badge.LEVEL_2, level, 2),
+            b(Badge.MIND_3, mind, 3),
+            b(Badge.FIRST_PILATES, pilates, 1),
             b(Badge.STEPS_10K, maxSteps, 10_000),
             b(Badge.STEPS_20K, maxSteps, 20_000),
             b(Badge.FIRST_WORKOUT, workouts, 1),

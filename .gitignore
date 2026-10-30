@@ -10,3 +10,4 @@ release/
 *.keystore
 *.apk
 tools/preview.png
+tools/scenes.png

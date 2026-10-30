@@ -60,6 +60,7 @@ import kotlinx.coroutines.launch
 internal val FLOWS = listOf(
     R.string.flow_morning to listOf("yoga_mountain", "yoga_tree", "yoga_warrior", "yoga_triangle", "yoga_downward_dog"),
     R.string.flow_evening to listOf("yoga_child", "yoga_cobra", "yoga_forward_bend", "yoga_bridge", "yoga_savasana"),
+    R.string.flow_pilates to listOf("pilates_hundred", "pilates_roll_up", "pilates_single_leg", "pilates_leg_circle", "pilates_swimming", "pilates_teaser"),
 )
 
 /** Yoga flows, single poses and a guided breathing exercise. */
@@ -67,12 +68,13 @@ internal val FLOWS = listOf(
 fun YogaScreen(app: io.github.smyrna_pergamum.exercisetracker.App, repo: Repository, nav: NavHostController) {
     val scope = rememberCoroutineScope()
     val poses = Catalog.all.filter { it.group == Group.YOGA }
+    val pilates = Catalog.all.filter { it.group == Group.PILATES }
     val flowNames = FLOWS.map { stringResource(it.first) }
     LazyVerticalGrid(GridCells.Adaptive(150.dp), Modifier.fillMaxSize(), contentPadding = androidx.compose.foundation.layout.PaddingValues(16.dp),
         horizontalArrangement = Arrangement.spacedBy(12.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         item(span = { GridItemSpan(maxLineSpan) }) {
             Row(Modifier.statusBarsPadding(), verticalAlignment = Alignment.CenterVertically) {
-                Text(stringResource(R.string.tab_yoga), style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f))
+                Text(stringResource(R.string.yoga_pilates), style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f))
                 SettingsAction(nav)
             }
         }
@@ -89,6 +91,7 @@ fun YogaScreen(app: io.github.smyrna_pergamum.exercisetracker.App, repo: Reposit
                 }
             }
         }
+        item(span = { GridItemSpan(maxLineSpan) }) { NatureSounds(app) }
         item(span = { GridItemSpan(maxLineSpan) }) { MeditationMusic(app) }
         FLOWS.forEachIndexed { i, (_, ids) ->
             item(span = { GridItemSpan(maxLineSpan) }) {
@@ -111,6 +114,21 @@ fun YogaScreen(app: io.github.smyrna_pergamum.exercisetracker.App, repo: Reposit
             Text(stringResource(R.string.poses), style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
         }
         items(poses, key = { it.id }) { e ->
+            Card(onClick = { nav.navigate("exercise/${e.id}") }, shape = RoundedCornerShape(24.dp),
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer)) {
+                Column(Modifier.padding(8.dp)) {
+                    Box(Modifier.fillMaxWidth().aspectRatio(4f / 3f).clip(RoundedCornerShape(18.dp)).background(groupTint(e.group))) {
+                        ExerciseImage(e, Modifier.fillMaxSize())
+                    }
+                    Text(stringResource(e.title), style = MaterialTheme.typography.titleSmall, textAlign = TextAlign.Center,
+                        modifier = Modifier.fillMaxWidth().padding(top = 4.dp))
+                }
+            }
+        }
+        item(span = { GridItemSpan(maxLineSpan) }) {
+            Text(stringResource(R.string.group_pilates), style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+        }
+        items(pilates, key = { it.id }) { e ->
             Card(onClick = { nav.navigate("exercise/${e.id}") }, shape = RoundedCornerShape(24.dp),
                 colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer)) {
                 Column(Modifier.padding(8.dp)) {
@@ -181,6 +199,9 @@ fun BreatheScreen(app: io.github.smyrna_pergamum.exercisetracker.App, repo: Repo
             }
             TextButton(onClick = { if (finished) nav.popBackStack() else stop() }) {
                 Text(stringResource(if (finished) R.string.close else R.string.finish), color = Color.White, style = MaterialTheme.typography.titleMedium)
+            }
+            if (finished) TextButton(onClick = { goHome(nav) }) {
+                Text(stringResource(R.string.back_home), color = Color.White, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
             }
         }
         if (finished) Confetti(Modifier.fillMaxSize()) {}

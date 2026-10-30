@@ -152,6 +152,17 @@ fun BodyScreen(app: App, repo: Repository, settings: Settings, nav: NavHostContr
                         val r = Body.normalRange(h)
                         Text(stringResource(R.string.bmi_range, w(r.start, unit), w(r.endInclusive, unit)), style = MaterialTheme.typography.bodySmall)
                     }
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        listOf(io.github.smyrna_pergamum.exercisetracker.data.Sex.FEMALE to R.string.female, io.github.smyrna_pergamum.exercisetracker.data.Sex.MALE to R.string.male).forEach { (sx, label) ->
+                            androidx.compose.material3.FilterChip(settings.sex == sx, { scope.launch { app.settings.setSex(sx) } }, label = { Text(stringResource(label)) })
+                        }
+                    }
+                    if (h != null && settings.sex != null) {
+                        val female = settings.sex == io.github.smyrna_pergamum.exercisetracker.data.Sex.FEMALE
+                        Text(stringResource(R.string.ideal_weight, stringResource(if (female) R.string.female else R.string.male), w(Math.round(Body.idealKg(h, female) * 10) / 10.0, unit)),
+                            style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Bold)
+                        Text(stringResource(R.string.bmi_sex_note), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    }
                     TextButton(onClick = { editHeight = true }) {
                         Text(h?.let { stringResource(R.string.height_value, it) } ?: stringResource(R.string.set_height))
                     }

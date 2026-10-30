@@ -56,6 +56,7 @@ import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import io.github.smyrna_pergamum.exercisetracker.App
 import io.github.smyrna_pergamum.exercisetracker.R
 import io.github.smyrna_pergamum.exercisetracker.data.Repository
@@ -311,7 +312,7 @@ fun WorkoutDetail(repo: Repository, settings: Settings, nav: NavHostController, 
     var delete by remember { mutableStateOf(false) }
     val workout = w ?: return
     Column(Modifier.fillMaxSize()) {
-        Bar(workout.title, onBack = { if (!nav.popBackStack("history", false)) nav.navigate("history") }) {
+        Bar(workout.title, onBack = { if (nav.previousBackStackEntry?.destination?.route == "history") nav.popBackStack() else goHome(nav) }) {
             IconButton(onClick = { delete = true }) { Icon(Icons.Filled.Delete, stringResource(R.string.delete)) }
         }
         Column(Modifier.verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -331,8 +332,17 @@ fun WorkoutDetail(repo: Repository, settings: Settings, nav: NavHostController, 
                     }
                 }
             }
+            if (nav.previousBackStackEntry?.destination?.route != "history") BigButton(stringResource(R.string.back_home), { goHome(nav) }, Modifier.padding(top = 8.dp))
         }
     }
     if (delete) Confirm(stringResource(R.string.delete_workout), stringResource(R.string.delete_workout_text), stringResource(R.string.delete),
         { scope.launch { repo.deleteWorkout(id); nav.popBackStack() } }) { delete = false }
+}
+
+/** Back to the Activity home with the tab bar, dropping finished workout screens from the stack. */
+fun goHome(nav: NavHostController) {
+    nav.navigate("activity") {
+        popUpTo(nav.graph.findStartDestination().id) { inclusive = false }
+        launchSingleTop = true
+    }
 }

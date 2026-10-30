@@ -143,6 +143,19 @@ E = {
     "yoga_forward_bend": (pose(-90, (-82, -84), (-80, -82), (0, 0), (2, 2), foot_n=-90, foot_f=-88),
                           pose(-22, (8, 4), (10, 6), (0, 0), (2, 2), foot_n=-90, foot_f=-88), ["mat"]),
     "yoga_savasana": (pose(180, (18, 4), (20, 6), (2, 0), (4, 2), foot_n=-80, foot_f=-78), None, ["mat"]),
+    # Pilates (on the mat, lying with the head to the left unless prone).
+    "pilates_hundred": (pose(198, (6, 6), (8, 8), (-38, -38), (-36, -36), foot_n=-128, foot_f=-126),
+                        pose(198, (14, 14), (16, 16), (-38, -38), (-36, -36), foot_n=-128, foot_f=-126), ["mat"]),
+    "pilates_roll_up": (pose(180, (180, 180), (182, 182), (0, 0), (2, 2), foot_n=-90, foot_f=-88),
+                        pose(-28, (8, 6), (10, 8), (0, 0), (2, 2), foot_n=-90, foot_f=-88), ["mat"]),
+    "pilates_single_leg": (pose(200, (-40, 10), (-38, 12), (-115, -10), (-14, -14), foot_n=-100, foot_f=-104),
+                           pose(200, (-40, 10), (-38, 12), (-14, -14), (-115, -10), foot_n=-104, foot_f=-100), ["mat"]),
+    "pilates_leg_circle": (pose(180, (8, 2), (10, 4), (-90, -90), (2, 2), foot_n=-180, foot_f=-88),
+                           pose(180, (8, 2), (10, 4), (-58, -58), (2, 2), foot_n=-148, foot_f=-88), ["mat"]),
+    "pilates_swimming": (pose(-6, (-14, -14), (4, 4), (182, 182), (192, 192), foot_n=182, foot_f=192),
+                         pose(-6, (4, 4), (-14, -14), (192, 192), (182, 182), foot_n=192, foot_f=182), ["mat"]),
+    "pilates_teaser": (pose(180, (180, 180), (182, 182), (0, 0), (2, 2), foot_n=-90, foot_f=-88),
+                       pose(-128, (-40, -40), (-38, -38), (-38, -38), (-36, -36), foot_n=-128, foot_f=-126), ["mat"]),
 }
 
 

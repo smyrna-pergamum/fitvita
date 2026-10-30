@@ -189,10 +189,11 @@ class Repository(val db: AppDatabase, private val cipher: FieldCipher, private v
             src.workouts.forEach { w ->
                 val d = day(w.startedAt)
                 val yoga = w.items.isNotEmpty() && w.items.all { Catalog.isYoga(it.exerciseId) }
+                val pilates = if (w.items.any { Catalog.isPilates(it.exerciseId) }) 1 else 0
                 val hour = Instant.ofEpochMilli(w.startedAt).atZone(zone).hour
                 upd(d) {
                     if (yoga) it.copy(mindSessions = it.mindSessions + 1, sets = it.sets + (sets[w.id] ?: 0))
-                    else it.copy(workouts = it.workouts + 1, sets = it.sets + (sets[w.id] ?: 0),
+                    else it.copy(workouts = it.workouts + 1, sets = it.sets + (sets[w.id] ?: 0), pilates = it.pilates + pilates,
                         earliestWorkoutHour = minOf(it.earliestWorkoutHour ?: 24, hour))
                 }
             }

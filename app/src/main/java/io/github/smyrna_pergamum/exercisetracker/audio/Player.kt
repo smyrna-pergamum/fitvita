@@ -151,6 +151,11 @@ class PlaybackService : Service() {
 /** A bundled meditation track (tools: compressed to Opus 48 kbps from the user's files). */
 data class Track(val res: Int, val artist: String, val seconds: Int)
 
+/** A looping ambient sound with its picture. */
+data class Nature(val res: Int, val image: Int, val title: Int) {
+    val track get() = Track(res, "", 0)
+}
+
 object Tracks {
     val all = listOf(
         Track(R.raw.med_01, "AtlasAudio", 428),
@@ -168,6 +173,20 @@ object Tracks {
 
     /** "Breathing meditation", used behind the breathing exercise. */
     val breathing = all[7]
+
+    /** Ambient nature and place sounds; they loop endlessly. */
+    val nature = listOf(
+        Nature(R.raw.nat_birds, R.drawable.scene_birds, R.string.nat_birds),
+        Nature(R.raw.nat_wind, R.drawable.scene_wind, R.string.nat_wind),
+        Nature(R.raw.nat_water, R.drawable.scene_water, R.string.nat_water),
+        Nature(R.raw.nat_forest, R.drawable.scene_forest, R.string.nat_forest),
+        Nature(R.raw.nat_restaurant, R.drawable.scene_restaurant, R.string.nat_restaurant),
+        Nature(R.raw.nat_city, R.drawable.scene_city, R.string.nat_city),
+        Nature(R.raw.nat_rain, R.drawable.scene_rain, R.string.nat_rain),
+        Nature(R.raw.nat_fire, R.drawable.scene_fire, R.string.nat_fire),
+        Nature(R.raw.nat_night, R.drawable.scene_night, R.string.nat_night),
+        Nature(R.raw.nat_aquarium, R.drawable.scene_aquarium, R.string.nat_aquarium),
+    )
 }
 
 /** A radio station from Radio Browser. */

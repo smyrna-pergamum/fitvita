@@ -10,6 +10,7 @@ enum class Group(val label: Int) {
     CORE(R.string.group_core),
     CARDIO(R.string.group_cardio),
     YOGA(R.string.group_yoga),
+    PILATES(R.string.group_pilates),
 }
 
 /**
@@ -62,9 +63,16 @@ object Catalog {
         e("yoga_forward_bend", Group.YOGA, R.string.ex_yoga_forward_bend, R.string.ex_yoga_forward_bend_steps, R.drawable.ex_yoga_forward_bend_a, R.drawable.ex_yoga_forward_bend_b, Measure.TIME),
         e("yoga_bridge", Group.YOGA, R.string.ex_yoga_bridge, R.string.ex_yoga_bridge_steps, R.drawable.ex_glute_bridge_a, R.drawable.ex_glute_bridge_b, Measure.TIME),
         e("yoga_savasana", Group.YOGA, R.string.ex_yoga_savasana, R.string.ex_yoga_savasana_steps, R.drawable.ex_yoga_savasana_a, R.drawable.ex_yoga_savasana_b, Measure.TIME),
+        e("pilates_hundred", Group.PILATES, R.string.ex_pilates_hundred, R.string.ex_pilates_hundred_steps, R.drawable.ex_pilates_hundred_a, R.drawable.ex_pilates_hundred_b, Measure.TIME),
+        e("pilates_roll_up", Group.PILATES, R.string.ex_pilates_roll_up, R.string.ex_pilates_roll_up_steps, R.drawable.ex_pilates_roll_up_a, R.drawable.ex_pilates_roll_up_b),
+        e("pilates_single_leg", Group.PILATES, R.string.ex_pilates_single_leg, R.string.ex_pilates_single_leg_steps, R.drawable.ex_pilates_single_leg_a, R.drawable.ex_pilates_single_leg_b),
+        e("pilates_leg_circle", Group.PILATES, R.string.ex_pilates_leg_circle, R.string.ex_pilates_leg_circle_steps, R.drawable.ex_pilates_leg_circle_a, R.drawable.ex_pilates_leg_circle_b),
+        e("pilates_swimming", Group.PILATES, R.string.ex_pilates_swimming, R.string.ex_pilates_swimming_steps, R.drawable.ex_pilates_swimming_a, R.drawable.ex_pilates_swimming_b, Measure.TIME),
+        e("pilates_teaser", Group.PILATES, R.string.ex_pilates_teaser, R.string.ex_pilates_teaser_steps, R.drawable.ex_pilates_teaser_a, R.drawable.ex_pilates_teaser_b),
     )
 
     fun isYoga(id: String) = get(id)?.group == Group.YOGA
+    fun isPilates(id: String) = get(id)?.group == Group.PILATES
 
     private val byId = all.associateBy { it.id }
 

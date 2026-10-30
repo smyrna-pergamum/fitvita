@@ -231,6 +231,12 @@ class GameTest {
         assertTrue(b.getValue(io.github.smyrna_pergamum.exercisetracker.domain.Badge.FIRST_WORKOUT).unlocked)
         assertFalse(b.getValue(io.github.smyrna_pergamum.exercisetracker.domain.Badge.HYDRATED_7).unlocked)
         assertEquals(2, b.getValue(io.github.smyrna_pergamum.exercisetracker.domain.Badge.HYDRATED_7).progress)
+        // Beginner badges come first and are easy to reach.
+        assertEquals(io.github.smyrna_pergamum.exercisetracker.domain.Badge.FIRST_GLASS, Game.badges(emptyMap(), g, 0.0, 0.0, 1).first().badge)
+        assertTrue(b.getValue(io.github.smyrna_pergamum.exercisetracker.domain.Badge.FIRST_GLASS).unlocked)
+        assertTrue(b.getValue(io.github.smyrna_pergamum.exercisetracker.domain.Badge.LEVEL_2).unlocked)
+        assertTrue(b.getValue(io.github.smyrna_pergamum.exercisetracker.domain.Badge.ROUTE_1K).unlocked)
+        assertFalse(b.getValue(io.github.smyrna_pergamum.exercisetracker.domain.Badge.FIRST_PILATES).unlocked)
     }
 }
 
@@ -258,6 +264,11 @@ class BodyTest {
         assertEquals(io.github.smyrna_pergamum.exercisetracker.domain.BmiBand.OBESE, Body.band(30.0))
         val r = Body.normalRange(175)
         assertEquals(56.66, r.start, 0.01); assertEquals(76.26, r.endInclusive, 0.01)
+    }
+
+    @Test fun idealWeightBySex() {
+        assertEquals(70.5, Body.idealKg(175, female = false), 0.1)
+        assertEquals(66.0, Body.idealKg(175, female = true), 0.1)
     }
 
     @Test fun goalProgressBothDirections() {

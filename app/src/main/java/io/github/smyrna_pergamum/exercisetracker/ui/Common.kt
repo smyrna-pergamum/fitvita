@@ -118,13 +118,13 @@ private fun scheme(mode: ThemeMode) = when (mode) {
         surfaceContainerLow = Color.White, surfaceContainer = Color.White, surfaceContainerHigh = Color.White,
         surfaceContainerHighest = Color.White, outlineVariant = Color(0xFFF0D3DE),
     )
-    ThemeMode.LIGHT -> lightColorScheme(
-        primary = Accent.Violet, onPrimary = Color.White, primaryContainer = Color(0xFFE9E3FF), onPrimaryContainer = Color(0xFF2A1680),
-        secondary = Accent.Steps, onSecondary = Color.White, secondaryContainer = Color(0xFFFFE8CC), onSecondaryContainer = Color(0xFF4A2800),
-        tertiary = Accent.Route, background = Color(0xFFF6F7FB), surface = Color(0xFFF6F7FB), onSurface = Color(0xFF1B1D24),
-        onSurfaceVariant = Color(0xFF616574), surfaceVariant = Color(0xFFE9EBF2), surfaceContainerLowest = Color.White,
-        surfaceContainerLow = Color.White, surfaceContainer = Color.White, surfaceContainerHigh = Color.White,
-        surfaceContainerHighest = Color.White, outlineVariant = Color(0xFFDDE0EA),
+    ThemeMode.BROWN -> darkColorScheme(
+        primary = Color(0xFFE0A877), onPrimary = Color(0xFF3B2210), primaryContainer = Color(0xFF5A3A22), onPrimaryContainer = Color(0xFFFFDCC2),
+        secondary = Color(0xFFF0B98A), onSecondary = Color(0xFF3B2210), secondaryContainer = Color(0xFF4E3424), onSecondaryContainer = Color(0xFFFFDCC2),
+        tertiary = Color(0xFFB8D18A), background = Color(0xFF1C1410), surface = Color(0xFF1C1410), onSurface = Color(0xFFF1E3D8),
+        onSurfaceVariant = Color(0xFFCDB8A8), surfaceVariant = Color(0xFF3A2C24), surfaceContainerLowest = Color(0xFF140E0B),
+        surfaceContainerLow = Color(0xFF241A15), surfaceContainer = Color(0xFF2A1F19), surfaceContainerHigh = Color(0xFF2F231C),
+        surfaceContainerHighest = Color(0xFF34271F), outlineVariant = Color(0xFF4A3A30),
     )
 }
 
@@ -132,7 +132,7 @@ private fun hero(mode: ThemeMode) = when (mode) {
     ThemeMode.BLUE -> Brush.linearGradient(listOf(Color(0xFF1E6FE8), Color(0xFF00B4D8)))
     ThemeMode.DARK -> Brush.linearGradient(listOf(Color(0xFF1B3A7A), Color(0xFF3A1B7A)))
     ThemeMode.PINK -> Brush.linearGradient(listOf(Color(0xFFE0457B), Color(0xFFFF9A76)))
-    ThemeMode.LIGHT -> Accent.hero()
+    ThemeMode.BROWN -> Brush.linearGradient(listOf(Color(0xFF7A4A2A), Color(0xFFC8864E)))
 }
 
 @Composable
@@ -164,6 +164,7 @@ fun groupTint(g: io.github.smyrna_pergamum.exercisetracker.domain.Group): Color 
     io.github.smyrna_pergamum.exercisetracker.domain.Group.CORE -> Accent.Water
     io.github.smyrna_pergamum.exercisetracker.domain.Group.CARDIO -> Accent.Route
     io.github.smyrna_pergamum.exercisetracker.domain.Group.YOGA -> Accent.Mind
+    io.github.smyrna_pergamum.exercisetracker.domain.Group.PILATES -> Accent.Body
 }.copy(alpha = if (MaterialTheme.colorScheme.background.luminance() < 0.3f) 0.2f else 0.12f)
 
 @OptIn(ExperimentalMaterial3Api::class)
