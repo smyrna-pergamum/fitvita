@@ -329,7 +329,6 @@
     <string name="precise_title">Precise location is off</string>
     <string name="precise_text">With approximate location only, routes and distances are very rough. Allow precise location for this app.</string>
     <string name="meditation_music">Meditation music</string>
-    <string name="track_n">Meditation %1$d</string>
     <string name="sleep_timer">Stop after</string>
     <string name="with_music">With music</string>
     <string name="next_up">Next</string>
@@ -523,4 +522,5 @@
     <string name="ex_pilates_shoulder_bridge_steps">Lift the hips into a bridge, feet flat.\nKick one straight leg up to the ceiling.\nLower it with control; keep the hips high, then switch.</string>
     <string name="ex_pilates_rolling">Rolling like a ball</string>
     <string name="ex_pilates_rolling_steps">Sit and hug your shins, feet off the floor, back round.\nRoll back onto your shoulder blades.\nRoll up again and balance; don\'t roll onto your neck.</string>
+    <string name="sound_credits">Sounds and music (Wikimedia Commons):</string>
 </resources>

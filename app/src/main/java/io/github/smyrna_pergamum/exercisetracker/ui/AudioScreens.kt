@@ -145,8 +145,7 @@ fun RadioScreen(app: App, nav: NavHostController, back: Boolean = false) {
 @Composable
 fun MeditationMusic(app: App) {
     val now by app.player.now.collectAsState()
-    val nameOf = @Composable { i: Int -> stringResource(R.string.track_n, i + 1) }
-    val names = Tracks.all.indices.map { nameOf(it) }
+    val names = Tracks.all.map { it.title }
     Card(shape = RoundedCornerShape(28.dp)) {
         Column(Modifier.padding(vertical = 12.dp)) {
             Row(Modifier.padding(horizontal = 20.dp), verticalAlignment = Alignment.CenterVertically) {

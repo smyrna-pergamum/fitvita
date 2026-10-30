@@ -327,7 +327,6 @@
  "precise_title": "La localisation précise est désactivée",
  "precise_text": "Avec une localisation approximative, parcours et distances sont très imprécis. Autorise la localisation précise pour cette app.",
  "meditation_music": "Musique de méditation",
- "track_n": "Méditation %1$d",
  "sleep_timer": "Arrêt après",
  "with_music": "Avec musique",
  "next_up": "Ensuite",
@@ -520,5 +519,6 @@
  "ex_pilates_shoulder_bridge": "Pont d'épaules",
  "ex_pilates_shoulder_bridge_steps": "Montez le bassin en pont, pieds à plat.\nLevez une jambe tendue vers le plafond.\nDescendez-la avec contrôle ; bassin haut, puis changez.",
  "ex_pilates_rolling": "Roulé en boule",
- "ex_pilates_rolling_steps": "Assis, tenez vos tibias, pieds levés, dos rond.\nRoulez en arrière jusqu'aux omoplates.\nRevenez en équilibre ; ne roulez pas sur la nuque."
+ "ex_pilates_rolling_steps": "Assis, tenez vos tibias, pieds levés, dos rond.\nRoulez en arrière jusqu'aux omoplates.\nRevenez en équilibre ; ne roulez pas sur la nuque.",
+ "sound_credits": "Sons et musique (Wikimedia Commons) :"
 }

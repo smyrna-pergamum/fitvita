@@ -329,7 +329,6 @@
     <string name="precise_title">الموقع الدقيق متوقف</string>
     <string name="precise_text">مع الموقع التقريبي تكون المسارات والمسافات غير دقيقة. اسمح بالموقع الدقيق لهذا التطبيق.</string>
     <string name="meditation_music">موسيقى التأمل</string>
-    <string name="track_n">تأمل %1$d</string>
     <string name="sleep_timer">إيقاف بعد</string>
     <string name="with_music">مع موسيقى</string>
     <string name="next_up">التالي</string>
@@ -523,4 +522,5 @@
     <string name="ex_pilates_shoulder_bridge_steps">ارفع الورك إلى وضع الجسر والقدمان على الأرض.\nارفع ساقًا ممدودة نحو السقف.\nأنزلها بتحكّم مع إبقاء الورك مرتفعًا ثم بدّل.</string>
     <string name="ex_pilates_rolling">التدحرج كالكرة</string>
     <string name="ex_pilates_rolling_steps">اجلس واحتضن ساقيك والقدمان مرفوعتان والظهر مستدير.\nتدحرج للخلف حتى لوحي الكتف.\nعُد للأعلى وحافظ على التوازن ولا تتدحرج على الرقبة.</string>
+    <string name="sound_credits">الأصوات والموسيقى (ويكيميديا كومنز):</string>
 </resources>

@@ -33,6 +33,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
@@ -41,6 +42,7 @@ import androidx.navigation.NavHostController
 import io.github.smyrna_pergamum.exercisetracker.App
 import io.github.smyrna_pergamum.exercisetracker.BuildConfig
 import io.github.smyrna_pergamum.exercisetracker.R
+import io.github.smyrna_pergamum.exercisetracker.audio.SoundCredits
 import io.github.smyrna_pergamum.exercisetracker.backup.Backup
 import io.github.smyrna_pergamum.exercisetracker.backup.BackupData
 import io.github.smyrna_pergamum.exercisetracker.data.Settings
@@ -193,6 +195,8 @@ fun SettingsScreen(app: App, settings: Settings, nav: NavHostController) {
             Section(stringResource(R.string.about))
             Text(stringResource(R.string.about_text), style = MaterialTheme.typography.bodySmall)
             Text(stringResource(R.string.health_text), style = MaterialTheme.typography.bodySmall)
+            Text(stringResource(R.string.sound_credits), style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.Bold)
+            Text(SoundCredits.lines.joinToString("\n"), style = MaterialTheme.typography.bodySmall)
 
             Section(stringResource(R.string.delete_data))
             Text(stringResource(R.string.wipe_text), style = MaterialTheme.typography.bodySmall)

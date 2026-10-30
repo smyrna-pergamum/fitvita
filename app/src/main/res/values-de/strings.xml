@@ -329,7 +329,6 @@
     <string name="precise_title">Genauer Standort ist aus</string>
     <string name="precise_text">Mit ungefährem Standort sind Routen und Strecken sehr ungenau. Erlaube dieser App den genauen Standort.</string>
     <string name="meditation_music">Meditationsmusik</string>
-    <string name="track_n">Meditation %1$d</string>
     <string name="sleep_timer">Stopp nach</string>
     <string name="with_music">Mit Musik</string>
     <string name="next_up">Als Nächstes</string>
@@ -523,4 +522,5 @@
     <string name="ex_pilates_shoulder_bridge_steps">Hüfte zur Brücke heben, Füße flach.\nEin gestrecktes Bein zur Decke heben.\nKontrolliert senken; Hüfte bleibt oben, dann wechseln.</string>
     <string name="ex_pilates_rolling">Rollen wie ein Ball</string>
     <string name="ex_pilates_rolling_steps">Sitzen, Schienbeine umfassen, Füße hoch, Rücken rund.\nBis auf die Schulterblätter zurückrollen.\nWieder hochrollen und balancieren; nicht auf den Nacken.</string>
+    <string name="sound_credits">Klänge und Musik (Wikimedia Commons):</string>
 </resources>

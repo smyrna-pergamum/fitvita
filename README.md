@@ -32,13 +32,26 @@ and exercise texts CC-BY-SA-4.0 (own work). See [BUILDING.md](BUILDING.md) and [
 
 ## Third-party content
 
-- Meditation music: 11 tracks supplied by the app owner (AtlasAudio, Leberch, Nastelbom,
-  Sound4Stock, Viacheslav Starostin, Verclub Music), compressed to Opus 48 kbps. They appear to come
-  from Pixabay (Pixabay Content License): usable in apps, but **not a free licence**, so F-Droid would
-  flag them or require removing them. Verify before publishing.
-- Nature sounds: 10 recordings supplied by the app owner (WR Sound Library, shut_up_ghost,
-  SoundReality, Dragon Studio, Eryliaa, joelfazhari), compressed to Opus 32 kbps. They also appear to
-  come from Pixabay (same licence note as above). Scene pictures are own work.
+All bundled sounds come from [Wikimedia Commons](https://commons.wikimedia.org/) under free licences.
+They were trimmed (long recordings to 5–10 minutes, with fades for looping), loudness-normalised and
+re-encoded to Opus (music 48 kbps, nature 32 kbps); the changed versions keep the original licence.
+
+- Meditation music by Kevin MacLeod (incompetech.com): Meditation Impromptu 01/02/03, Healing,
+  Relaxing Piano Music, Dreamer, Floating Cities, Jellyfish in Space, Soaring, Ossuary 5 – Rest
+  (CC BY 3.0) and Wholesome (CC BY 4.0).
+- Nature sounds:
+  - Birds: "Birdsong morning 01" by Matutinho (CC BY-SA 4.0)
+  - Wind: "Wind sounds 2020-05-10 1625" by Robert EA Harvey (CC BY-SA 4.0)
+  - Water: "stream-river-water-up-close" by jackthemurray (CC0)
+  - Forest: "Waidachswald Oberschefflenz Abend 20250616" by Evillan (CC0)
+  - Restaurant: "Cafe ambiance" by Marble Toast (CC0)
+  - City: "Sunday in the city street noise1" by cori (public domain)
+  - Rain: "Light Rain Distant Thunder July 5th 2016" by kvgarlic (CC0)
+  - Fire: "Campfire sound ambience" by Glaneur de sons (CC BY 3.0)
+  - Night: "Crickets choir" by Serg Childed (CC BY-SA 4.0)
+  - Aquarium: "Artis, bak van het aquarium" by Beeld en Geluid (CC BY-SA 3.0)
+
+  Scene pictures are own work.
 - Radio station list: [radio-browser.info](https://www.radio-browser.info/) (public domain data, free API).
 - Map tiles and data: © OpenStreetMap contributors (ODbL).
 - Libraries: AndroidX, Jetpack Compose, Room, DataStore, Media3/ExoPlayer, osmdroid, kotlinx – Apache-2.0.

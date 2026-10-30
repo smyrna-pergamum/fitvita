@@ -329,7 +329,6 @@
     <string name="precise_title">Hassas konum kapalı</string>
     <string name="precise_text">Yalnızca yaklaşık konumla rota ve mesafe çok kaba olur. Bu uygulamaya hassas konum izni ver.</string>
     <string name="meditation_music">Meditasyon müzikleri</string>
-    <string name="track_n">Meditasyon %1$d</string>
     <string name="sleep_timer">Kapanma</string>
     <string name="with_music">Müzikle</string>
     <string name="next_up">Sıradaki</string>
@@ -523,4 +522,5 @@
     <string name="ex_pilates_shoulder_bridge_steps">Kalçayı köprüye kaldır, ayaklar yerde.\nBir bacağını düz şekilde tavana kaldır.\nKontrollü indir; kalça yüksek kalsın, sonra değiştir.</string>
     <string name="ex_pilates_rolling">Top gibi yuvarlanma</string>
     <string name="ex_pilates_rolling_steps">Otur, kaval kemiklerine sarıl, ayaklar havada, sırt yuvarlak.\nKürek kemiklerine kadar geriye yuvarlan.\nTekrar yuvarlanıp dengede kal; boynuna kadar gitme.</string>
+    <string name="sound_credits">Sesler ve müzik (Wikimedia Commons):</string>
 </resources>

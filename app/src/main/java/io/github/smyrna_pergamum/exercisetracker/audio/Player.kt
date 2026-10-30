@@ -186,31 +186,31 @@ class PlaybackService : Service() {
     }
 }
 
-/** A bundled meditation track (tools: compressed to Opus 48 kbps from the user's files). */
-data class Track(val res: Int, val artist: String, val seconds: Int)
+/** A bundled meditation track (Opus 48 kbps; sources and licences in [SoundCredits]). */
+data class Track(val res: Int, val title: String, val artist: String, val seconds: Int)
 
 /** A looping ambient sound with its picture. */
 data class Nature(val res: Int, val image: Int, val title: Int) {
-    val track get() = Track(res, "", 0)
+    val track get() = Track(res, "", "", 0)
 }
 
 object Tracks {
     val all = listOf(
-        Track(R.raw.med_01, "AtlasAudio", 428),
-        Track(R.raw.med_02, "AtlasAudio", 490),
-        Track(R.raw.med_03, "Leberch", 426),
-        Track(R.raw.med_04, "Leberch", 348),
-        Track(R.raw.med_05, "Nastelbom", 549),
-        Track(R.raw.med_06, "Sound4Stock", 600),
-        Track(R.raw.med_07, "Viacheslav Starostin", 546),
-        Track(R.raw.med_08, "Verclub Music", 511),
-        Track(R.raw.med_09, "Verclub Music", 522),
-        Track(R.raw.med_10, "Verclub Music", 511),
-        Track(R.raw.med_11, "Viacheslav Starostin", 594),
+        Track(R.raw.med_01, "Meditation Impromptu 01", "Kevin MacLeod", 213),
+        Track(R.raw.med_02, "Meditation Impromptu 02", "Kevin MacLeod", 249),
+        Track(R.raw.med_03, "Meditation Impromptu 03", "Kevin MacLeod", 255),
+        Track(R.raw.med_04, "Healing", "Kevin MacLeod", 520),
+        Track(R.raw.med_05, "Relaxing Piano Music", "Kevin MacLeod", 600),
+        Track(R.raw.med_06, "Dreamer", "Kevin MacLeod", 204),
+        Track(R.raw.med_07, "Floating Cities", "Kevin MacLeod", 184),
+        Track(R.raw.med_08, "Wholesome", "Kevin MacLeod", 364),
+        Track(R.raw.med_09, "Jellyfish in Space", "Kevin MacLeod", 391),
+        Track(R.raw.med_10, "Soaring", "Kevin MacLeod", 380),
+        Track(R.raw.med_11, "Ossuary 5 - Rest", "Kevin MacLeod", 236),
     )
 
-    /** "Breathing meditation", used behind the breathing exercise. */
-    val breathing = all[7]
+    /** Quiet piano, used behind the breathing exercises. */
+    val breathing = all[0]
 
     /** Ambient nature and place sounds; they loop endlessly. */
     val nature = listOf(

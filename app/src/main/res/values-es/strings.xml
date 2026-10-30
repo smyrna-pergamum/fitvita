@@ -329,7 +329,6 @@
     <string name="precise_title">La ubicación precisa está desactivada</string>
     <string name="precise_text">Con la ubicación aproximada, rutas y distancias son muy imprecisas. Permite la ubicación precisa para esta app.</string>
     <string name="meditation_music">Música de meditación</string>
-    <string name="track_n">Meditación %1$d</string>
     <string name="sleep_timer">Parar tras</string>
     <string name="with_music">Con música</string>
     <string name="next_up">Siguiente</string>
@@ -523,4 +522,5 @@
     <string name="ex_pilates_shoulder_bridge_steps">Sube la cadera en puente, pies apoyados.\nEleva una pierna recta al techo.\nBájala con control; cadera alta, luego cambia.</string>
     <string name="ex_pilates_rolling">Rodar como una pelota</string>
     <string name="ex_pilates_rolling_steps">Sentado, abraza las espinillas, pies arriba, espalda redonda.\nRueda hacia atrás hasta los omóplatos.\nVuelve arriba y equilibra; no ruedes sobre el cuello.</string>
+    <string name="sound_credits">Sonidos y música (Wikimedia Commons):</string>
 </resources>

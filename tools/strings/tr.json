@@ -327,7 +327,6 @@
  "precise_title": "Hassas konum kapalı",
  "precise_text": "Yalnızca yaklaşık konumla rota ve mesafe çok kaba olur. Bu uygulamaya hassas konum izni ver.",
  "meditation_music": "Meditasyon müzikleri",
- "track_n": "Meditasyon %1$d",
  "sleep_timer": "Kapanma",
  "with_music": "Müzikle",
  "next_up": "Sıradaki",
@@ -520,5 +519,6 @@
  "ex_pilates_shoulder_bridge": "Omuz köprüsü",
  "ex_pilates_shoulder_bridge_steps": "Kalçayı köprüye kaldır, ayaklar yerde.\nBir bacağını düz şekilde tavana kaldır.\nKontrollü indir; kalça yüksek kalsın, sonra değiştir.",
  "ex_pilates_rolling": "Top gibi yuvarlanma",
- "ex_pilates_rolling_steps": "Otur, kaval kemiklerine sarıl, ayaklar havada, sırt yuvarlak.\nKürek kemiklerine kadar geriye yuvarlan.\nTekrar yuvarlanıp dengede kal; boynuna kadar gitme."
+ "ex_pilates_rolling_steps": "Otur, kaval kemiklerine sarıl, ayaklar havada, sırt yuvarlak.\nKürek kemiklerine kadar geriye yuvarlan.\nTekrar yuvarlanıp dengede kal; boynuna kadar gitme.",
+ "sound_credits": "Sesler ve müzik (Wikimedia Commons):"
 }

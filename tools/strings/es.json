@@ -327,7 +327,6 @@
  "precise_title": "La ubicación precisa está desactivada",
  "precise_text": "Con la ubicación aproximada, rutas y distancias son muy imprecisas. Permite la ubicación precisa para esta app.",
  "meditation_music": "Música de meditación",
- "track_n": "Meditación %1$d",
  "sleep_timer": "Parar tras",
  "with_music": "Con música",
  "next_up": "Siguiente",
@@ -520,5 +519,6 @@
  "ex_pilates_shoulder_bridge": "Puente de hombros",
  "ex_pilates_shoulder_bridge_steps": "Sube la cadera en puente, pies apoyados.\nEleva una pierna recta al techo.\nBájala con control; cadera alta, luego cambia.",
  "ex_pilates_rolling": "Rodar como una pelota",
- "ex_pilates_rolling_steps": "Sentado, abraza las espinillas, pies arriba, espalda redonda.\nRueda hacia atrás hasta los omóplatos.\nVuelve arriba y equilibra; no ruedes sobre el cuello."
+ "ex_pilates_rolling_steps": "Sentado, abraza las espinillas, pies arriba, espalda redonda.\nRueda hacia atrás hasta los omóplatos.\nVuelve arriba y equilibra; no ruedes sobre el cuello.",
+ "sound_credits": "Sonidos y música (Wikimedia Commons):"
 }

@@ -327,7 +327,6 @@
  "precise_title": "Genauer Standort ist aus",
  "precise_text": "Mit ungefährem Standort sind Routen und Strecken sehr ungenau. Erlaube dieser App den genauen Standort.",
  "meditation_music": "Meditationsmusik",
- "track_n": "Meditation %1$d",
  "sleep_timer": "Stopp nach",
  "with_music": "Mit Musik",
  "next_up": "Als Nächstes",
@@ -520,5 +519,6 @@
  "ex_pilates_shoulder_bridge": "Schulterbrücke",
  "ex_pilates_shoulder_bridge_steps": "Hüfte zur Brücke heben, Füße flach.\nEin gestrecktes Bein zur Decke heben.\nKontrolliert senken; Hüfte bleibt oben, dann wechseln.",
  "ex_pilates_rolling": "Rollen wie ein Ball",
- "ex_pilates_rolling_steps": "Sitzen, Schienbeine umfassen, Füße hoch, Rücken rund.\nBis auf die Schulterblätter zurückrollen.\nWieder hochrollen und balancieren; nicht auf den Nacken."
+ "ex_pilates_rolling_steps": "Sitzen, Schienbeine umfassen, Füße hoch, Rücken rund.\nBis auf die Schulterblätter zurückrollen.\nWieder hochrollen und balancieren; nicht auf den Nacken.",
+ "sound_credits": "Klänge und Musik (Wikimedia Commons):"
 }

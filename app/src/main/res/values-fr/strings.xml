@@ -329,7 +329,6 @@
     <string name="precise_title">La localisation précise est désactivée</string>
     <string name="precise_text">Avec une localisation approximative, parcours et distances sont très imprécis. Autorise la localisation précise pour cette app.</string>
     <string name="meditation_music">Musique de méditation</string>
-    <string name="track_n">Méditation %1$d</string>
     <string name="sleep_timer">Arrêt après</string>
     <string name="with_music">Avec musique</string>
     <string name="next_up">Ensuite</string>
@@ -523,4 +522,5 @@
     <string name="ex_pilates_shoulder_bridge_steps">Montez le bassin en pont, pieds à plat.\nLevez une jambe tendue vers le plafond.\nDescendez-la avec contrôle ; bassin haut, puis changez.</string>
     <string name="ex_pilates_rolling">Roulé en boule</string>
     <string name="ex_pilates_rolling_steps">Assis, tenez vos tibias, pieds levés, dos rond.\nRoulez en arrière jusqu\'aux omoplates.\nRevenez en équilibre ; ne roulez pas sur la nuque.</string>
+    <string name="sound_credits">Sons et musique (Wikimedia Commons) :</string>
 </resources>

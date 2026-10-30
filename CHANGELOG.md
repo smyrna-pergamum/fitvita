@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.1 (2026-10-30)
+- All music and nature sounds replaced with freely licensed recordings from Wikimedia Commons
+  (Kevin MacLeod music, CC0 / CC BY / CC BY-SA nature sounds); credits under Settings → About.
+  The app now has no non-free content and can be published on F-Droid.
+
 ## 0.3.0 (2026-10-30)
 - Workout tab: "Start your own workout", stopwatch and countdown timer, new routines (glutes, legs,
   waist & belly toning), yoga and pilates flows and exercises moved here.

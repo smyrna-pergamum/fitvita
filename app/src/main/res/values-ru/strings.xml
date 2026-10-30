@@ -329,7 +329,6 @@
     <string name="precise_title">Точная геолокация выключена</string>
     <string name="precise_text">С приблизительной геолокацией маршруты и расстояния очень неточны. Разрешите точную геолокацию для приложения.</string>
     <string name="meditation_music">Музыка для медитации</string>
-    <string name="track_n">Медитация %1$d</string>
     <string name="sleep_timer">Стоп через</string>
     <string name="with_music">С музыкой</string>
     <string name="next_up">Далее</string>
@@ -523,4 +522,5 @@
     <string name="ex_pilates_shoulder_bridge_steps">Поднимите таз в мостик, стопы на полу.\nПоднимите прямую ногу к потолку.\nОпустите подконтрольно; таз высоко, затем смена.</string>
     <string name="ex_pilates_rolling">Перекаты на спине</string>
     <string name="ex_pilates_rolling_steps">Сядьте, обхватите голени, стопы над полом, спина круглая.\nПерекатитесь назад до лопаток.\nВернитесь и удержите баланс; не катитесь на шею.</string>
+    <string name="sound_credits">Звуки и музыка (Wikimedia Commons):</string>
 </resources>
