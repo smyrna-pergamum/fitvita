@@ -18,7 +18,7 @@ Binaries: https://github.com/smyrna-pergamum/fitvita/releases/download/v%v/FitVi
 Builds:
   - versionName: 0.3.1
     versionCode: 4
-    commit: b5f3f57d1a7f91653eba0692d475a2233bdea574
+    commit: d2d5c6b63150503aa765962095799dbdb7dc3dc5
     subdir: app
     gradle:
       - yes
