@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.2 (2026-11-02)
+- Changing the language no longer flashes a white screen: the screen fades softly into the new
+  language and keeps the current theme colour.
+
 ## 0.3.1 (2026-10-30)
 - All music and nature sounds replaced with freely licensed recordings from Wikimedia Commons
   (Kevin MacLeod music, CC0 / CC BY / CC BY-SA nature sounds); credits under Settings → About.

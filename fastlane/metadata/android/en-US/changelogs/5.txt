@@ -1,0 +1,1 @@
+Changing the language no longer flashes a white screen; the screen now fades softly into the new language.

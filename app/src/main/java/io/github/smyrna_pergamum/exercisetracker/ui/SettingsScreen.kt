@@ -135,10 +135,10 @@ fun SettingsScreen(app: App, settings: Settings, nav: NavHostController) {
             }
             Section(stringResource(R.string.language))
             FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                FilterChip(appLocales.isEmpty, { AppCompatDelegate.setApplicationLocales(LocaleListCompat.getEmptyLocaleList()) },
+                FilterChip(appLocales.isEmpty, { scope.launch { ScreenFade.switchLanguage(LocaleListCompat.getEmptyLocaleList()) } },
                     label = { Text(stringResource(R.string.lang_system)) })
                 LANGUAGES.forEach { (tag, label) ->
-                    FilterChip(!appLocales.isEmpty && lang == tag, { AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(tag)) }, label = { Text(label) })
+                    FilterChip(!appLocales.isEmpty && lang == tag, { scope.launch { ScreenFade.switchLanguage(LocaleListCompat.forLanguageTags(tag)) } }, label = { Text(label) })
                 }
             }
 

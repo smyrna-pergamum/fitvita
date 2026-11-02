@@ -1,0 +1,1 @@
+Dil değiştirirken artık beyaz ekran parlaması olmuyor; ekran yeni dile yumuşak bir geçişle açılıyor.
