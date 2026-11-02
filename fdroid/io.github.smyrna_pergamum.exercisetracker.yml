@@ -16,9 +16,9 @@ Repo: https://github.com/smyrna-pergamum/fitvita.git
 Binaries: https://github.com/smyrna-pergamum/fitvita/releases/download/v%v/FitVita-%v.apk
 
 Builds:
-  - versionName: 0.3.1
-    versionCode: 4
-    commit: d2d5c6b63150503aa765962095799dbdb7dc3dc5
+  - versionName: 0.3.2
+    versionCode: 5
+    commit: d06985bef9774dfe843da2bdcbecea227e1e03d1
     subdir: app
     gradle:
       - yes
@@ -27,5 +27,5 @@ AllowedAPKSigningKeys: 00c0c381dc8d83e138780572a374a11bfbc99402ee6a1a42465fe0ae3
 
 AutoUpdateMode: Version
 UpdateCheckMode: Tags
-CurrentVersion: 0.3.1
-CurrentVersionCode: 4
+CurrentVersion: 0.3.2
+CurrentVersionCode: 5
