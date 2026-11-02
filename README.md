@@ -8,14 +8,14 @@ A colourful, gamified healthy-living app. No account, no ads, no trackers, no se
 stays on your phone.
 
 <p>
-  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/1.png" width="160" alt="Activity">
-  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/2.png" width="160" alt="Workout">
-  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/4.png" width="160" alt="Guided workout">
-  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/5.png" width="160" alt="Inner peace">
-  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/6.png" width="160" alt="Box breathing">
-  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/7.png" width="160" alt="Rewards">
-  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/8.png" width="160" alt="Radio">
-  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/9.png" width="160" alt="Timer">
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/1.png" width="150" alt="Activity">
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/2.png" width="150" alt="Workout">
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/4.png" width="150" alt="Guided workout">
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/5.png" width="150" alt="Inner peace">
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/6.png" width="150" alt="Box breathing">
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/7.png" width="150" alt="Rewards">
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/8.png" width="150" alt="Radio">
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/9.png" width="150" alt="Timer">
 </p>
 
 ## Download
