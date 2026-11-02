@@ -1,34 +1,83 @@
+<img src="fastlane/metadata/android/en-US/images/icon.png" width="96" align="right" alt="FitVita icon">
+
 # FitVita
 
 *Sport and healthy living, made fun.* Move, drink, breathe and level up on Android.
 
-A colourful, gamified healthy-living app for Android. No account, no ads, no trackers, no server.
+A colourful, gamified healthy-living app. No account, no ads, no trackers, no server: everything
+stays on your phone.
 
-- **Activity (home)** – big step counter with an animated walking buddy, walked distance, 7-day bars;
+<p>
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/1.png" width="160" alt="Activity">
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/2.png" width="160" alt="Workout">
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/4.png" width="160" alt="Guided workout">
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/5.png" width="160" alt="Inner peace">
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/6.png" width="160" alt="Box breathing">
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/7.png" width="160" alt="Rewards">
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/8.png" width="160" alt="Radio">
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/9.png" width="160" alt="Timer">
+</p>
+
+## Download
+
+- **GitHub:** the latest signed APK is on the [Releases page](https://github.com/smyrna-pergamum/fitvita/releases/latest).
+  Each release has a `.sha256` file to check the download. New versions install over old ones and keep your data.
+- **F-Droid:** submitted, [waiting for review](https://gitlab.com/fdroid/fdroiddata/-/merge_requests/54988).
+  F-Droid builds will carry the same signature as the GitHub releases, so you can switch between them.
+
+Requires Android 8.0 (API 26) or newer. No Google Play Services needed.
+
+## Features
+
+- **Activity (home)** – step counter with an animated walking buddy, walked distance and 7-day bars;
   four daily quests (walk, drink water, move, yoga & breath); water tracker; GPS route recording.
-- **Workout** – your own workout or ready routines (full body, cardio, dumbbell basics, glutes, legs,
-  waist & belly), yoga and pilates flows, 53 illustrated exercises, one-tap sets, rest timer,
+- **Workout** – start your own workout or a ready routine (full body, cardio, dumbbell basics, glutes,
+  legs, waist & belly), yoga and pilates flows, 53 illustrated exercises, one-tap sets, rest timer,
   stopwatch and countdown timer.
-- **Inner peace** – meditation routines (morning calm, stress relief, focus, sleep wind-down),
-  calm, box and 4-7-8 breathing, body scan, 5-4-3-2-1 grounding, muscle relaxation, gratitude.
-- **Rewards** – XP, levels and ranks, day streaks, 31 badges (tap one to see how to earn it), confetti when a quest is done.
-- **Radio** – free internet radio from the Radio Browser directory (local, world, all or by genre; no key, HTTPS streams only),
-  also reachable from every workout and route screen; a mini player stays at the bottom.
-- **Weight & BMI** – daily weigh-ins (+10 XP), BMI with WHO bands, female/male reference weight
-  (Devine formula), weight goal and trend chart.
 - **Guided workouts** – preview a routine, then do it one exercise at a time with countdowns,
   beeps and rest timers.
-- **Meditation music** – 11 tracks with a sleep timer and a next button; soft music behind the calm exercises.
-- **Nature sounds** – 10 illustrated, endlessly looping sounds: birds, wind, water, forest,
-  restaurant, city centre, rain, fire, frogs & crickets, aquarium.
+- **Inner peace** – meditation routines (morning calm, stress relief, focus, sleep wind-down),
+  calm, box and 4-7-8 breathing, body scan, 5-4-3-2-1 grounding, muscle relaxation and gratitude.
+- **Meditation music and nature sounds** – 11 calm tracks with a sleep timer, and 10 illustrated,
+  endlessly looping sounds (birds, wind, water, forest, restaurant, city centre, rain, fire,
+  night crickets, aquarium).
+- **Radio** – free internet radio from the Radio Browser directory (local, world, all or by genre;
+  HTTPS streams only), also reachable from workout and route screens. A mini player with
+  play/pause and next stays at the bottom.
+- **Rewards** – XP, levels and ranks, day streaks, 31 badges (tap one to see how to earn it) and
+  confetti when a quest is done.
+- **Weight & BMI** – daily weigh-ins, BMI with WHO bands, female/male reference weight
+  (Devine formula), weight goal and trend chart.
 - **History** (in Settings) – workouts and routes; share a route as a picture, save it or export GPX.
 - **Reminders** – friendly nudges for water (with a "+1 glass" button in the notification), moving,
   workouts and yoga; they stay quiet once the goal is reached.
-- Four themes: Blue and Dark with a male character, Pink and Brown with a female character. UI in Türkçe, English, Deutsch, Español, Français, Русский, العربية.
+- **Backup** – password-protected backup and restore of all your data.
+- Four themes (Blue, Dark, Pink, Brown) and seven languages: Türkçe, English, Deutsch, Español,
+  Français, Русский, العربية.
 
-Kotlin, Jetpack Compose, Material 3, Room, DataStore, osmdroid. minSdk 26, no Google Play Services.
-Application ID `io.github.smyrna_pergamum.exercisetracker`. Licence GPL-3.0-or-later; illustrations
-and exercise texts CC-BY-SA-4.0 (own work). See [BUILDING.md](BUILDING.md) and [PRIVACY.md](PRIVACY.md).
+## Privacy
+
+Your data never leaves the phone. Sets and routes are encrypted with a key kept in Android
+Keystore. Location is used only while you record a route, the step counter is off until you turn it
+on, and the only network traffic is the radio you choose to play and the map tiles. Details in
+[PRIVACY.md](PRIVACY.md).
+
+## Building
+
+Kotlin, Jetpack Compose, Material 3, Navigation, Room, DataStore, Media3/ExoPlayer, osmdroid.
+
+```
+./gradlew testDebugUnitTest
+./gradlew assembleDebug
+```
+
+See [BUILDING.md](BUILDING.md) for requirements, generated resources and release signing.
+Application ID: `io.github.smyrna_pergamum.exercisetracker`.
+
+## Licence
+
+Code: [GPL-3.0-or-later](LICENSE). Illustrations and exercise texts: CC-BY-SA-4.0 (own work).
+Changes per version: [CHANGELOG.md](CHANGELOG.md).
 
 ## Third-party content
 
