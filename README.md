@@ -29,9 +29,12 @@ Requires Android 8.0 (API 26) or newer. No Google Play Services needed.
 
 ## Website
 
+**Live: [smyrna-pergamum.github.io/fitvita](https://smyrna-pergamum.github.io/fitvita/)**
+
 An experimental, playable landing page lives in [`docs/`](docs): a knockout intro, a sticky app tour, the app's
 daily quests to tap through, the meditation music, nature sounds and live radio, and the three breathing patterns.
-Open `docs/index.html` in a browser, or serve the folder with GitHub Pages (Settings → Pages → `main`, `/docs`).
+It is served with GitHub Pages from `main`, `/docs`, so changes there go live after the next Pages build.
+You can also open `docs/index.html` directly in a browser.
 
 ## Features
 
