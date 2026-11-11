@@ -27,6 +27,12 @@ stays on your phone.
 
 Requires Android 8.0 (API 26) or newer. No Google Play Services needed.
 
+## Website
+
+An experimental, playable landing page lives in [`docs/`](docs): a knockout intro, a sticky app tour, the app's
+daily quests to tap through, the meditation music, nature sounds and live radio, and the three breathing patterns.
+Open `docs/index.html` in a browser, or serve the folder with GitHub Pages (Settings → Pages → `main`, `/docs`).
+
 ## Features
 
 - **Activity (home)** – step counter with an animated walking buddy, walked distance and 7-day bars;
@@ -103,4 +109,7 @@ re-encoded to Opus (music 48 kbps, nature 32 kbps); the changed versions keep th
   Scene pictures are own work.
 - Radio station list: [radio-browser.info](https://www.radio-browser.info/) (public domain data, free API).
 - Map tiles and data: © OpenStreetMap contributors (ODbL).
+- Website (`docs/`): videos and photos from [Pexels](https://www.pexels.com/license/) (free to use), trimmed and
+  compressed; sound previews are short clips of the bundled audio above. Fonts Unbounded, Manrope and JetBrains Mono
+  (SIL Open Font License) load from Google Fonts.
 - Libraries: AndroidX, Jetpack Compose, Room, DataStore, Media3/ExoPlayer, osmdroid, kotlinx – Apache-2.0.
